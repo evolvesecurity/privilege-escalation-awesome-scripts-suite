@@ -21,7 +21,10 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: 'winPEAS/winPEASexe/*.sln'
-    configuration: 'Release'
+    msbuildArchitecture: 'x64'
+    platform: 'x64'
+    configuration: 'release'
+    clean: true
 
 - task: PowerShell@2
   inputs:
@@ -33,7 +36,7 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: '$(Build.SourcesDirectory)/s3upload.exe -source $(Build.SourcesDirectory)/winPEAS/winPEASexe/winPEAS/bin/Release/winPEAS.exe -destination /winPEAS.exe'
+    script: '$(Build.SourcesDirectory)/s3upload.exe -source $(Build.SourcesDirectory)/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe -destination /winPEAS.exe'
     failOnStderr: true
   env:
     AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
