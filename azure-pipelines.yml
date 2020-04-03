@@ -21,7 +21,6 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: 'winPEAS/winPEASexe/*.sln'
-    msbuildArchitecture: 'x64'
     configuration: 'Release'
 
 - task: PowerShell@2
