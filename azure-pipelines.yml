@@ -11,6 +11,13 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'Remove-Item -Recurse -Force winPEAS/winPEASexe/packages'
+    failOnStderr: true
+    workingDirectory: '$(Build.SourcesDirectory)'
+
 steps:
 - task: NuGetToolInstaller@1
 
@@ -50,7 +57,12 @@ steps:
     failOnStderr: true
     workingDirectory: '$(Build.SourcesDirectory)'
 
-
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '((Get-Content -path winPEAS/winPEASexe/winPEAS/winPEAS.csproj -Raw) -replace "v4.0","v3.5") | Set-Content -Path winPEAS/winPEASexe/winPEAS/winPEAS.csproj'
+    failOnStderr: true
+    workingDirectory: '$(Build.SourcesDirectory)'
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
