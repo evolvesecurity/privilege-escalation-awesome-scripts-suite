@@ -27,6 +27,12 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: '(New-Object Net.WebClient).DownloadFile("https://github.com/3lpsy/s3upload/releases/download/0.0.1/s3upload-windows-amd64", "./s3upload.exe")'
+    script: '(New-Object Net.WebClient).DownloadFile("https://github.com/3lpsy/s3upload/releases/download/0.0.1/s3upload-windows-amd64", "$(Build.SourcesDirectory)/s3upload.exe")'
     failOnStderr: true
     workingDirectory: '$(Build.SourcesDirectory)'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '$(Build.SourcesDirectory)/s3upload.exe -source $(Build.SourcesDirectory)/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe -destination /winPEAS.exe'
+    failOnStderr: true
