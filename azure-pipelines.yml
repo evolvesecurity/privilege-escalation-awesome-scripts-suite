@@ -56,39 +56,39 @@ steps:
 # Does not work for 3.5:
 # ApplicationInfo.cs(8,23): error CS0234: The type or namespace name 'TaskScheduler' does not exist in the namespace 'Microsoft.Win32' (are you missing an assembly reference?)
 
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: '((Get-Content -path winPEAS/winPEASexe/winPEAS/winPEAS.csproj -Raw) -replace "v4.0","v3.5") | Set-Content -Path winPEAS/winPEASexe/winPEAS/winPEAS.csproj'
-#     failOnStderr: true
-#     workingDirectory: '$(Build.SourcesDirectory)'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '((Get-Content -path winPEAS/winPEASexe/winPEAS/winPEAS.csproj -Raw) -replace "v4.0","v3.5") | Set-Content -Path winPEAS/winPEASexe/winPEAS/winPEAS.csproj'
+    failOnStderr: true
+    workingDirectory: '$(Build.SourcesDirectory)'
 
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: '((Get-Content -path winPEAS/winPEASexe/winPEAS/winPEAS.csproj -Raw) -replace "v4.0","v3.5") | Set-Content -Path winPEAS/winPEASexe/winPEAS/winPEAS.csproj'
-#     failOnStderr: true
-#     workingDirectory: '$(Build.SourcesDirectory)'
-# - task: NuGetToolInstaller@1
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '((Get-Content -path winPEAS/winPEASexe/winPEAS/winPEAS.csproj -Raw) -replace "v4.0","v2.0") | Set-Content -Path winPEAS/winPEASexe/winPEAS/winPEAS.csproj'
+    failOnStderr: true
+    workingDirectory: '$(Build.SourcesDirectory)'
+- task: NuGetToolInstaller@1
 
-# - task: NuGetCommand@2
-#   inputs:
-#     restoreSolution: '$(solution)'
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
 
-# - task: MSBuild@1
-#   inputs:
-#     solution: 'winPEAS/winPEASexe/*.sln'
-#     msbuildArchitecture: 'x64'
-#     platform: 'x64'
-#     configuration: 'release'
-#     clean: true
+- task: MSBuild@1
+  inputs:
+    solution: 'winPEAS/winPEASexe/*.sln'
+    msbuildArchitecture: 'x64'
+    platform: 'x64'
+    configuration: 'release'
+    clean: true
 
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: '$(Build.SourcesDirectory)/s3upload.exe -source $(Build.SourcesDirectory)/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe -destination /winPEAS35.exe'
-#     failOnStderr: true
-#   env:
-#     AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-#     AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
-#     AWS_BUCKET: $(AWS_BUCKET)
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: '$(Build.SourcesDirectory)/s3upload.exe -source $(Build.SourcesDirectory)/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe -destination /winPEAS35.exe'
+    failOnStderr: true
+  env:
+    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+    AWS_BUCKET: $(AWS_BUCKET)
