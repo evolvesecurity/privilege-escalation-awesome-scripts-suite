@@ -54,7 +54,7 @@ steps:
     AWS_BUCKET: $(AWS_BUCKET)
 
 # Does not work for 3.5:
-# ApplicationInfo.cs(8,23): error CS0234: The type or namespace name 'TaskScheduler' does not exist in the namespace 'Microsoft.Win32' (are you missing an assembly reference?) [d:\a\1\s\winPEAS\winPEASexe\winPEAS\winPEAS.csproj]
+# ApplicationInfo.cs(8,23): error CS0234: The type or namespace name 'TaskScheduler' does not exist in the namespace 'Microsoft.Win32' (are you missing an assembly reference?)
 
 # - task: PowerShell@2
 #   inputs:
