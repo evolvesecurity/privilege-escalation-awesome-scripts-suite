@@ -11,14 +11,16 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+
+steps:
+
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: 'Remove-Item -Recurse -Force winPEAS/winPEASexe/packages'
     failOnStderr: true
     workingDirectory: '$(Build.SourcesDirectory)'
-
-steps:
+    
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
